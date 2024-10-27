@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "155a953a-65e7-4c50-be5c-4e9f0ea46df7",
+		"name": "Paylocity API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1149246"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Set headers dynamically",
+							"pm.request.headers.add({",
+							"    key: \"Authorization\",",
+							"    value: `Basic VGVzdFVzZXI0Nzc6M2l9WXdwYVdRJTkj`",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the response schema for required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(employee) {",
+							"        pm.expect(employee).to.have.property('partitionKey');",
+							"        pm.expect(employee).to.have.property('sortKey');",
+							"        pm.expect(employee).to.have.property('username');",
+							"        pm.expect(employee).to.have.property('id');",
+							"        pm.expect(employee).to.have.property('firstName');",
+							"        pm.expect(employee).to.have.property('lastName');",
+							"        pm.expect(employee).to.have.property('dependants');",
+							"        pm.expect(employee).to.have.property('expiration');",
+							"        pm.expect(employee).to.have.property('salary');",
+							"        pm.expect(employee).to.have.property('gross');",
+							"        pm.expect(employee).to.have.property('benefitsCost');",
+							"        pm.expect(employee).to.have.property('net');",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic VGVzdFVzZXI0Nzc6M2l9WXdwYVdRJTkj",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/api/employees",
+					"protocol": "https",
+					"host": [
+						"wmxrwq14uc",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"Prod",
+						"api",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
