@@ -1,0 +1,31 @@
+describe('Login Test', () => {
+    it('Logs in with valid credentials', () => {
+        // Visit the login URL
+        cy.visit('https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/Account/LogIn');
+
+        // Enter the username
+        cy.get('input[id="Username"]').type('TestUser477');
+
+        // Enter the password
+        cy.get('input[id="Password"]').type('3i}YwpaWQ%9#');
+
+        // Submit the login form
+        cy.get('button[type="submit"]').click();
+
+        // Verify login success (you may need to customize this based on your application's response)
+        cy.url().should('not.include', '/LogIn'); // Ensure you are redirected away from the login page
+
+        // Click Add employee
+        cy.get('button[id="add"]').click();
+
+        // Enter First Name
+        cy.get('input[id="firstName"]').type('First');
+        //Enter Last Name
+        cy.get('input[id="lastName"]').type('Last');
+        //Enter Dependents
+        cy.get('input[id="dependants"]').type('0');
+        //click add
+        cy.get('button[id="addEmployee"]').click();
+    });
+
+});
